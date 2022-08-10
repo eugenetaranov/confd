@@ -17,6 +17,5 @@ jobs:
         env:
           GOPROXY: "https://proxy.golang.org"
         run: |
-          go mod init
+          # go mod init
           make build
-
