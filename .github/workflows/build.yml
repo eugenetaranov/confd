@@ -11,11 +11,11 @@ jobs:
           go-version: 1.10
       - name: Check out source code
         uses: actions/checkout@v1
-      - name: test docker
+      - name: Build docker image
         run:
           docker build -q -t confd_builder -f Dockerfile.build.alpine .
-      - name: Build
+      - name: Build confd
         run:
           VERSION=`egrep -o '[0-9]+\.[0-9a-z.\-]+' version.go`
-          docker run -it --rm -v ${PWD}:/app -e "GOOS=linux" -e "GOARCH=arm64" -e "CGO_ENABLED=0" confd_builder \
+          docker run --rm -v ${PWD}:/app -e "GOOS=linux" -e "GOARCH=arm64" -e "CGO_ENABLED=0" confd_builder \
             go build -ldflags="-s -w -X main.GitSHA=${GIT_SHA}" -o bin/confd-${VERSION}-linux-arm64
