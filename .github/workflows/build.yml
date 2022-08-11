@@ -18,4 +18,5 @@ jobs:
           GOPROXY: "https://proxy.golang.org"
         run: |
           go mod init tmp
+          go mod vendor
           make build
