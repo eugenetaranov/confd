@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v1
       - name: test docker
         run:
-          docker ps -a
+          docker build -q -t confd_builder -f Dockerfile.build.alpine .
       - name: Build
         env:
           GOPROXY: "https://proxy.golang.org"
