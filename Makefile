@@ -1,11 +1,14 @@
 .PHONY: build install clean test integration dep release
 VERSION=`egrep -o '[0-9]+\.[0-9a-z.\-]+' version.go`
 GIT_SHA=`git rev-parse --short HEAD || echo`
+GOARCH="amd64"
+GOOS="linux"
+
 
 build:
 	@echo "Building confd..."
 	@mkdir -p bin
-	@go build -ldflags "-X main.GitSHA=${GIT_SHA}" -o bin/confd .
+	GOOS=${GOOS} GOARCH=${GOARCH} go build -ldflags "-X main.GitSHA=${GIT_SHA}" -o bin/confd .
 
 install:
 	@echo "Installing confd..."

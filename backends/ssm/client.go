@@ -1,13 +1,12 @@
 package ssm
 
 import (
-	"os"
-
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/awserr"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/ssm"
 	"github.com/kelseyhightower/confd/log"
+	"os"
 )
 
 type Client struct {
@@ -16,7 +15,9 @@ type Client struct {
 
 func New() (*Client, error) {
 	// Create a session to share configuration, and load external configuration.
-	sess := session.Must(session.NewSession())
+	sess := session.Must(session.NewSession(aws.NewConfig().
+		WithMaxRetries(10),
+	))
 
 	// Fail early, if no credentials can be found
 	_, err := sess.Config.Credentials.Get()
