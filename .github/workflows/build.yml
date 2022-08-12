@@ -11,7 +11,7 @@ jobs:
         goos: linux
         goarch: amd64
         goversion: "https://dl.google.com/go/go1.10.1.linux-amd64.tar.gz"
-        project_path: "."
+        project_path: "./confd"
         binary_name: "confd-0.17.0-dev-linux-arm64"
 
 #      - name: Check out source code
