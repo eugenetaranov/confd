@@ -12,7 +12,7 @@ jobs:
           docker build -q -t confd_builder -f Dockerfile.build.alpine .
       - name: Version
         id: version
-        run: "egrep -o '[0-9]+\.[0-9a-z.\-]+' version.go"
+        run: 'egrep -o "[0-9]+\.[0-9a-z.\-]+" version.go'
       - name: Build confd
         run: |
           docker run --rm -v ${PWD}:/app -e "GOOS=linux" -e "GOARCH=arm64" -e "CGO_ENABLED=0" confd_builder \
