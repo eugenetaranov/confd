@@ -21,9 +21,6 @@ jobs:
         run: |
           ls -l bin
       - name: Release
-        uses: Hs1r1us/Release-AIO@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ github.ref }}
-          asset_files: ./bin/confd-0.17.0-dev-linux-arm64
+          files: ./bin/confd-0.17.0-dev-linux-arm64
