@@ -17,7 +17,6 @@ jobs:
             go build -ldflags="-s -w -X main.GitSHA=${GIT_SHA}" -o bin/confd-${VERSION}-linux-arm64
       - name: test
         run: |
-          ls -l
           ls -l bin
       - name: Upload binaries
         uses: svenstaro/upload-release-action@v2
