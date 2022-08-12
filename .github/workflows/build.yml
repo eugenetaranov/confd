@@ -25,4 +25,3 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: bin/confd-0.17.0-dev-linux-arm64
           asset_name: confd-0.17.0-dev-linux-arm64
-          tag: ${{ github.ref }}
