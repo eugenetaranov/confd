@@ -5,26 +5,17 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-    - uses: wangyoucao577/go-release-action@v1.30
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        goos: linux
-        goarch: amd64
-        goversion: "https://dl.google.com/go/go1.10.1.linux-amd64.tar.gz"
-        project_path: "./confd"
-        binary_name: "confd-0.17.0-dev-linux-arm64"
-
-#      - name: Check out source code
-#        uses: actions/checkout@v1
-#      - name: Preparing build environment
-#        run:
-#          docker build -q -t confd_builder -f Dockerfile.build.alpine .
-#      - name: Build confd
-#        run: |
-#          VERSION=`egrep -o '[0-9]+\.[0-9a-z.\-]+' version.go`
-#          docker run --rm -v ${PWD}:/app -e "GOOS=linux" -e "GOARCH=arm64" -e "CGO_ENABLED=0" confd_builder \
-#            go build -ldflags="-s -w -X main.GitSHA=${GIT_SHA}" -o bin/confd-${VERSION}-linux-arm64
-#      - name: test
-#        run: |
-#          ls -l
-#          ls -l bin
+      - name: Check out source code
+        uses: actions/checkout@v1
+      - name: Preparing build environment
+        run:
+          docker build -q -t confd_builder -f Dockerfile.build.alpine .
+      - name: Build confd
+        run: |
+          VERSION=`egrep -o '[0-9]+\.[0-9a-z.\-]+' version.go`
+          docker run --rm -v ${PWD}:/app -e "GOOS=linux" -e "GOARCH=arm64" -e "CGO_ENABLED=0" confd_builder \
+            go build -ldflags="-s -w -X main.GitSHA=${GIT_SHA}" -o bin/confd-${VERSION}-linux-arm64
+      - name: test
+        run: |
+          ls -l
+          ls -l bin
